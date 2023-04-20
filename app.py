@@ -27,7 +27,7 @@ session = Session()
 
 @app.route('/')
 def base_route():
-    return 'Base Route'
+    return 'Base Pricing Route'
 
 # Service to return most recent price for given ticker
 @app.route('/price/<base>/<quote>')
