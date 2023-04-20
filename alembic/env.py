@@ -3,12 +3,16 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 import os
+from dotenv import load_dotenv
 
 from alembic import context
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
+# Load env vars
+load_dotenv()
 
 # Set the database url from the environment variable
 config.set_main_option('sqlalchemy.url', os.environ.get('DATABASE_URL'))

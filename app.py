@@ -29,32 +29,26 @@ session = Session()
 def base_route():
     return 'Base Route'
 
-# Service to return all USD price of given ticker greater than or equal to timestamp given
-@app.route('/price/<ticker>/<int:timestamp>')
-def get_price(ticker, timestamp):
+# Service to return most recent price for given ticker
+@app.route('/price/<base>/<quote>')
+def get_price(base, quote):
 
-    # TODO For testing 1681966800 = 2023-04-20 01:00:00
-
-    data = []
-
-    # Convert timestamp to datetime string to match db
-    datetime_string = datetime.fromtimestamp(timestamp)
+    # Format expected ticker
+    ticker = base + '-' + quote
   
-    # Grab all rows with given ticker and past or equal to the timestamp passed in
+    # Grab most recent row for given ticker (always returns 1 row)
     query = session.query(PricingData).filter(PricingData.ticker == ticker).\
-        filter(PricingData.datetime >= datetime_string)
-
+        order_by(PricingData.datetime.desc()).limit(1)
+    
+    # Always returns 1 row
     for row in query:
-
         json_return = {
             "datetime": row.datetime.strftime("%m-%d-%Y %H:%M:%S"),
             "ticker": row.ticker,
             "close_price": row.close
         }
 
-        data.append(json_return)
-
-    return data
+    return json_return
 
 
 if __name__ == '__main__':
