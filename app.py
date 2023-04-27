@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 import logging as logger
 
 
-
 app = Flask(__name__)
 
 # Load env vars
