@@ -7,7 +7,8 @@ from models import PricingData
 import os
 from datetime import datetime
 from dotenv import load_dotenv
-load_dotenv()
+import logging as logger
+
 
 
 app = Flask(__name__)

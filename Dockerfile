@@ -16,4 +16,7 @@ COPY . /app
 # configure the container to run in an executed manner
 ENTRYPOINT [ "python" ]
 
+# Turn on Flask debugger
+ENV FLASK_DEBUG=1
+
 CMD ["app.py" ]
