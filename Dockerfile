@@ -1,6 +1,9 @@
 # start by pulling the python image
 FROM python:3.8-alpine
 
+# Expose port 80
+EXPOSE 80
+
 # copy the requirements file into the image
 COPY ./requirements.txt /app/requirements.txt
 
